@@ -1,19 +1,10 @@
-server:
-  port: 8065 # Puerto estándar por convención para Eureka Server
-
 spring:
   application:
     name: eureka-server
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   config:
-    import: "optional:configserver:http://localhost:8085"
-eureka:
-  server:
-    enable-self-preservation: false # Desactiva el modo de autoprotección
-    eviction-interval-timer-in-ms: 3000 # Frecuencia de limpieza de servicios caídos (3 seg)
-  instance:
-    hostname: localhost
-  client:
-    register-with-eureka: false # Evita que el servidor se registre a sí mismo
-    fetch-registry: false      # No requiere descargar la lista de instancias
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8085}"
+  cloud:
+    compatibility-verifier:
+      enabled: false
