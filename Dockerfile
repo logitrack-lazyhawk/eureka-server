@@ -27,4 +27,3 @@ EXPOSE 8065
 # Comando de ejecución
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
-# Termine Pibes
